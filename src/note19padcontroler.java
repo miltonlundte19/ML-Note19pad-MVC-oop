@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 public class note19padcontroler {
     private note19padview view;
@@ -13,9 +16,20 @@ public class note19padcontroler {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        view.getLoadbutton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    view.settexteria(model.getfilecontent());
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     public static void main(String[] args) {
         note19padcontroler controller = new note19padcontroler();
     }
+
 }
